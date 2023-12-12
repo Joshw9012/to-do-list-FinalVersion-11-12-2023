@@ -7,12 +7,12 @@ import {
 } from "react-icons/hi2";
 import { completeTask, deleteTask, updateTask } from "../todoSlice";
 
-export function Task({ task, className }) {
+export function Task({ task, className, isEdit, setIsEditing }) {
   const dispatch = useDispatch();
   const [duedate, setDuedate] = useState(task.duedate);
   const [description, setDescription] = useState(task.description);
   const [priority, setPriority] = useState(task.priority);
-  const [isEditing, setIsEditing] = useState(false);
+  const isEditing = isEdit === task.id;
 
   let style = "";
   if (className === "todowatchlist") {
@@ -55,7 +55,7 @@ export function Task({ task, className }) {
   }
 
   function handleEditing() {
-    setIsEditing((isEditing) => !isEditing);
+    setIsEditing(task.id);
   }
   return (
     <li className="relative cursor-default">
